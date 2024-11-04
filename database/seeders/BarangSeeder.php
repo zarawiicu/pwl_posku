@@ -99,3 +99,4 @@ class BarangSeeder extends Seeder
         DB::table('m_barang')->insert($data);
     }
 }
+?>

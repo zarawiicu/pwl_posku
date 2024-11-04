@@ -90,3 +90,4 @@ class StokSeeder extends Seeder
         DB::table('t_stok')->insert($data);
     }
 }
+?>

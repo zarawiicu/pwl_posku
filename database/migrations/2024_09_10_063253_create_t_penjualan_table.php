@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id')->index();
             $table->string('pembeli', 50);
             $table->string('penjualan_kode', 20);
-            $table->datetime('tanggal');
+            $table->date('tanggal');
             $table->timestamps();
 
             $table->foreign('user_id')->references('user_id')->on('m_user');

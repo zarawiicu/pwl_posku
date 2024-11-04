@@ -4,19 +4,22 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class KategoriModel extends Model
 {
     use HasFactory;
 
     protected $table = 'm_kategori';
-    protected $primarykey = 'kategori_id';
+    protected $primarykey = 'id';
 
-    protected $fillable = ['kategori_id','kategori_kode', 'kategori_nama'];
+    protected $fillable = ['kategori_kode', 'kategori_nama'];
 
-    public function getIdAttribute()
+
+    public function barang() :HasMany
     {
-        return strtoupper($this->attributes['id']);
+        return $this->hasMany(    BarangModel::class);
+
     }
 
 }

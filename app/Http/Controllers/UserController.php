@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreUserRequest;
 use App\Models\LevelModel;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
@@ -65,7 +64,7 @@ class UserController extends Controller
         if ($request->level_id) {
             $users = $users->where('level_id', $request->level_id);
         }
-        
+
         return DataTables::of($users)
         ->addIndexColumn() // menambahkan kolom index / no urut (default nama kolom: DT_RowIndex)
         ->addColumn('aksi', function ($user) { // menambahkan kolom aksi
@@ -74,7 +73,7 @@ class UserController extends Controller
         $btn .= '<a href="'.url('/user/' . $user->user_id . '/edit').'" class="btn btn-warning btn-sm">Edit</a> ';
         $btn .= '<form class="d-inline-block" method="POST" action="'.url('/user/'.$user->user_id.'/destroy').'">'. csrf_field() .
         method_field('DELETE') .'<button type="submit" class="btn btn-danger btn-sm"
-        onclick="return confirm(\'Apakah Anda yakit menghapus data dengan Id = ' .$user->user_id. ' ini?\');">Hapus</button></form>';
+        onclick="return confirm(\'Apakah Anda yakin menghapus data dengan Id = ' .$user->user_id. ' ini?\');">Hapus</button></form>';
 
         return $btn;
     })
@@ -181,8 +180,8 @@ class UserController extends Controller
         {
             UserModel::destroy($id); //Hapus Data
             return redirect()->route('user.index')->with('success', 'Data User Berhasil Dihapus');
-        } 
-        catch (\Illuminate\Database\QueryException $e) 
+        }
+        catch (\Illuminate\Database\QueryException $e)
         {
             // Jika terjasi error saat menghapus data maka akan kembali
             return redirect()->route('user.index')->with('error', 'Data User Gagal Dihapus');

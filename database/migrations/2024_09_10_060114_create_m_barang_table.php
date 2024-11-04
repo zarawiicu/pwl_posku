@@ -21,7 +21,7 @@ return new class extends Migration
             $table->timestamps();
 
             // relasi
-            $table->foreign('kategori_id')->references('kategori_id')->on('m_kategori');
+            $table->foreign('kategori_id')->references('id')->on('m_kategori');
         });
     }
 

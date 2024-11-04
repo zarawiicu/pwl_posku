@@ -86,3 +86,4 @@ class DetailSeeder extends Seeder
         DB::table('t_penjualan_detail')->insert($data);
     }
 }
+?>

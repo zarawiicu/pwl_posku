@@ -1,69 +1,44 @@
-@extends('layouts.app')
-
+@extends('layouts.template')
 @section('content')
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>Level Form</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Level Form</li>
-            </ol>
-          </div>
+    <div class="card card-outline card-primary">
+        <div class="card-header">
+            <h3 class="card-title">{{ $page->title }}</h3>
+            <div class="card-tools"></div>
         </div>
-      </div><!-- /.container-fluid -->
-    </section>
-
-    <!-- Main content -->
-    <div class="container">
-        {{-- @if($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach($errors->all() as $error)
-                <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-        @endif --}}
-        <div class="card card-primary">
-            <div class="card-header">
-                <h5 class="card-title">Buat Kategori Baru</h5>
-            </div>
-
-            <form method="post" action="{{ route('level.store') }}">
+        <div class="card-body">
+            <form method="POST" action="{{ route('level.store') }}" class="form-horizontal">
                 @csrf
-                <div class="card-body">
-                    <div class="form-group">
-                        <label for="kodeKategori">Kode Level</label>
+                <div class="form-group row">
+                    <label for="kodelevel">Kode Level</label>
                         <input type="text" class="form-control" id="level_kode" name="level_kode"
                             placeholder="Isi kodemu...">
                         @error('level_kode')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
-
-                    </div>
-                    <div class="form-group">
-                        <label for="namaKategori">Nama Kategori</label>
-                        <input type="text" class="form-control" id="level_nama" name="level_nama"
-                            placeholder="Isi namamu...">
-                        @error('level_nama')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
-
-                    </div>
                 </div>
+                <div class="form-group row">
+                    <label for="namalevel">Nama Level</label>
+                    <input type="text" class="form-control" id="level_nama" name="level_nama"
+                        placeholder="Isi namamu...">
+                    @error('level_nama')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
 
-                <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+                <div class="form-group row">
+                    <label class="col-1 control-label col-form-label"></label>
+                    <div class="col-11">
+                        <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
+                        <a class="btn btn-sm btn-default ml-1" href="{{ url('level') }}">Kembali</a>
+                    </div>
                 </div>
             </form>
         </div>
     </div>
 @endsection
+@push('css')
+@endpush
+@push('js')
+@endpush
+
 
