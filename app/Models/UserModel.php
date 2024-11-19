@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-//use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Models\LevelModel; // {{ edit_1 }}
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -27,7 +27,7 @@ class UserModel extends Authenticatable implements JWTSubject
     protected $table = 'm_user';
     protected $primaryKey = 'user_id';
 
-    protected $fillable = ['username', 'nama', 'password', 'level_id'];
+    protected $fillable = ['username', 'nama', 'password', 'level_id', 'image'];
 
     public function level(): BelongsTo {
         return $this->belongsTo(LevelModel::class, 'level_id', 'level_id');
@@ -41,5 +41,10 @@ class UserModel extends Authenticatable implements JWTSubject
         return $this->hasMany(PenjualanModel::class);
     }
 
+    public function image(): Attribute {
+        return Attribute::make(
+            get: fn ($image) => $image ? url('/storage/uploads/' . $image) : null,
+        );
+    }
 
 }
